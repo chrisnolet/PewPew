@@ -6,8 +6,10 @@ public class NetworkPlayer : NetworkBehaviour {
 
   public GameObject sphere;
 
+  #pragma warning disable 0414
   [SyncVar(hook = "OnPositionOffsetChanged")] private Vector3 positionOffset;
   [SyncVar(hook = "OnRotationOffsetChanged")] private Quaternion rotationOffset;
+  #pragma warning restore 0414
 
   void Start() {
 
