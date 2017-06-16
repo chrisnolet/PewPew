@@ -1,0 +1,8 @@
+Heya, your player object should spawn the lazer with instantiate, and then set it's rigidbody velocity then and there.
+Set the rigidbody property 'iskinematic' of the lazer to true. This will make it maintain constant velocity
+
+
+
+instructions for deploying onto hololens:
+.you have your build in the builds folder
+.open the 
