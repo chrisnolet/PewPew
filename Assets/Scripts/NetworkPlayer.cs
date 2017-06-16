@@ -32,6 +32,14 @@ public class NetworkPlayer : NetworkBehaviour {
   }
 
   [Command]
+  void CmdSetPositionAndRotationOffset(Vector3 position, Quaternion rotation) {
+
+    // Update syncvars on server
+    positionOffset = position;
+    rotationOffset = rotation;
+  }
+
+  [Command]
   void CmdFire() {
     var laser = Instantiate(laserPrefab, transform.position, transform.rotation); // May require: transform.rotation * Quaternion.Euler(90, 0, 0);
 
