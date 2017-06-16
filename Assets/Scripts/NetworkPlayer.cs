@@ -4,6 +4,9 @@ using UnityEngine.Networking;
 public class NetworkPlayer : NetworkBehaviour {
   public GameObject laserPrefab;
 
+  [SyncVar] private Vector3 positionOffset;
+  [SyncVar] private Quaternion rotationOffset;
+
   void Start() {
 
   }
@@ -22,7 +25,7 @@ public class NetworkPlayer : NetworkBehaviour {
 
   [Command]
   void CmdFire() {
-    var laser = Instantiate(laserPrefab);
+    var laser = Instantiate(laserPrefab, transform.position, transform.rotation); // May require: transform.rotation * Quaternion.Euler(90, 0, 0);
 
     // Spawn on the clients
     NetworkServer.Spawn(laser);
