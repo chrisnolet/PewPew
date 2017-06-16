@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 4390927753446834}
   - component: {fileID: 114353685498202056}
   - component: {fileID: 114651597314387858}
+  - component: {fileID: 114485116647314758}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -144,6 +145,19 @@ MonoBehaviour:
     i15: 245
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114485116647314758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1349641590320990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28700201c659f4cbb80784b41a6cb24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 1689108121879910, guid: 9a578d57f89504fe190340d6ef2d69ff,
+    type: 2}
 --- !u!114 &114651597314387858
 MonoBehaviour:
   m_ObjectHideFlags: 1

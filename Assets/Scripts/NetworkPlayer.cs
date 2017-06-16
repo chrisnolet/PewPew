@@ -2,10 +2,10 @@
 using UnityEngine.Networking;
 
 public class NetworkPlayer : NetworkBehaviour {
-  private GameObject laserPrefab;
+  public GameObject laserPrefab;
 
   void Start() {
-    
+
   }
 
   void Update() {
@@ -22,7 +22,12 @@ public class NetworkPlayer : NetworkBehaviour {
 
   [Command]
   void CmdFire() {
-    NetworkServer.Spawn(laserPrefab);
+    var laser = Instantiate(laserPrefab);
+    laser.GetComponent<Rigidbody>().velocity = new Vector3(1, 0, 0);
+
+    // Spawn on the clients
+    NetworkServer.Spawn(laser);
+
     RpcFire();
   }
 
