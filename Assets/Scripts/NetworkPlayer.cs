@@ -11,6 +11,12 @@ public class NetworkPlayer : NetworkBehaviour {
 
   void Start() {
 
+    // Local player only
+    if (isLocalPlayer) {
+
+      // Attach player to the main camera
+      transform.SetParent(Camera.main.transform, false);
+    }
   }
 
   void Update() {
