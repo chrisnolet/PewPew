@@ -44,7 +44,7 @@ public class NetworkPlayer : NetworkBehaviour {
 
     // Add position offset for remote players only
     if (!isLocalPlayer) {
-      sphere.transform.position = value;
+      sphere.transform.localPosition = value;
     }
   }
 
@@ -52,7 +52,7 @@ public class NetworkPlayer : NetworkBehaviour {
 
     // Add rotation offset for remote players only
     if (!isLocalPlayer) {
-      sphere.transform.rotation = value;
+      sphere.transform.localRotation = value;
     }
   }
 }
