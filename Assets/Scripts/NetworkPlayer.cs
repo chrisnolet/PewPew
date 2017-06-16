@@ -41,10 +41,18 @@ public class NetworkPlayer : NetworkBehaviour {
   }
 
   void OnPositionOffsetChanged(Vector3 value) {
-    sphere.transform.position = value;
+
+    // Add position offset for remote players only
+    if (!isLocalPlayer) {
+      sphere.transform.position = value;
+    }
   }
 
   void OnRotationOffsetChanged(Quaternion value) {
-    sphere.transform.rotation = value;
+
+    // Add rotation offset for remote players only
+    if (!isLocalPlayer) {
+      sphere.transform.rotation = value;
+    }
   }
 }
