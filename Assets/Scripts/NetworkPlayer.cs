@@ -4,8 +4,10 @@ using UnityEngine.Networking;
 public class NetworkPlayer : NetworkBehaviour {
   public GameObject laserPrefab;
 
-  [SyncVar] private Vector3 positionOffset;
-  [SyncVar] private Quaternion rotationOffset;
+  public GameObject sphere;
+
+  [SyncVar(hook = "OnPositionOffsetChanged")] private Vector3 positionOffset;
+  [SyncVar(hook = "OnRotationOffsetChanged")] private Quaternion rotationOffset;
 
   void Start() {
 
@@ -36,5 +38,13 @@ public class NetworkPlayer : NetworkBehaviour {
   [ClientRpc]
   void RpcFire() {
 
+  }
+
+  void OnPositionOffsetChanged(Vector3 value) {
+    sphere.transform.position = value;
+  }
+
+  void OnRotationOffsetChanged(Quaternion value) {
+    sphere.transform.rotation = value;
   }
 }
