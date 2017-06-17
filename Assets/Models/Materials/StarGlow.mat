@@ -6,15 +6,21 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: lambert1
+  m_Name: StarGlow
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
+    - first:
+        name: <noninit>
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - first:
         name: _BumpMap
       second:
@@ -71,6 +77,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
+        name: <noninit>
+      second: 0
+    - first:
         name: _BumpScale
       second: 1
     - first:
@@ -93,7 +102,7 @@ Material:
       second: 1
     - first:
         name: _Metallic
-      second: 0
+      second: 0.062
     - first:
         name: _Mode
       second: 0
@@ -120,8 +129,11 @@ Material:
       second: 1
     m_Colors:
     - first:
+        name: <noninit>
+      second: {r: 0, g: 1, b: 0, a: NaN}
+    - first:
         name: _Color
-      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      second: {r: 0.9705882, g: 0.81899536, b: 0.18555363, a: 1}
     - first:
         name: _EmissionColor
-      second: {r: 0, g: 0, b: 0, a: 1}
+      second: {r: 0.78896564, g: 0.8, b: 0, a: 1}

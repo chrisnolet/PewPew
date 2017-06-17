@@ -1,44 +1,17 @@
 fileFormatVersion: 2
-guid: 8bc4f75461f4a4655b30a534a8f6452e
-timeCreated: 1497721071
+guid: 853f673c3f532466d92af894e03dceea
+timeCreated: 1497728454
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: pCone1
-    100002: pCone2
-    100004: pCone3
-    100006: pCone4
-    100008: pCone5
-    100010: //RootNode
-    100012: PewStar 1
-    100014: pSphere1
-    400000: pCone1
-    400002: pCone2
-    400004: pCone3
-    400006: pCone4
-    400008: pCone5
-    400010: //RootNode
-    400012: PewStar 1
-    400014: pSphere1
-    2300000: pCone1
-    2300002: pCone2
-    2300004: pCone3
-    2300006: pCone4
-    2300008: pCone5
-    2300010: pSphere1
-    3300000: pCone1
-    3300002: pCone2
-    3300004: pCone3
-    3300006: pCone4
-    3300008: pCone5
-    3300010: pSphere1
-    4300000: pSphere1
-    4300002: pCone2
-    4300004: pCone1
-    4300006: pCone5
-    4300008: pCone4
-    4300010: pCone3
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: PewStar
+    7400000: Take 001
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -101,7 +74,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
