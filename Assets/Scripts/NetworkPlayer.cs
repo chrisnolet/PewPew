@@ -83,7 +83,8 @@ public class NetworkPlayer : NetworkBehaviour {
 
   [Command]
   void CmdFire() {
-    var laser = Instantiate(laserPrefab, transform.position, transform.rotation); // May require: transform.rotation * Quaternion.Euler(90, 0, 0);
+    var laserRotation = transform.rotation * Quaternion.Euler(90, 0, 0);
+    var laser = Instantiate(laserPrefab, transform.position, laserRotation);
 
     // Spawn on the clients
     NetworkServer.Spawn(laser);

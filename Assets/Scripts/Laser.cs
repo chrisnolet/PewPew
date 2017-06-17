@@ -7,7 +7,7 @@ public class Laser : MonoBehaviour {
   void Start() {
 
     // Set the initial velocity
-    GetComponent<Rigidbody>().velocity = new Vector3(0, speed, 0); // May require: transform.rotation * new Vector3(0, speed, 0);
+    GetComponent<Rigidbody>().velocity = transform.rotation * new Vector3(0, speed, 0);
 
     // Destroy after lifetime expires
     Object.Destroy(gameObject, lifetime);
