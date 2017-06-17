@@ -1,0 +1,60 @@
+
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Windows.Speech;
+
+using UnityEngine.UI;
+
+public class test : MonoBehaviour {
+
+	public Text debugText;
+
+	KeywordRecognizer keywordRecognizer = null;
+	Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
+
+	GestureRecognizer recognizer;
+
+	LineRenderer line;
+
+	bool inHold = false;
+
+	void Start() {
+		recognizer = new GestureRecognizer();
+		line = GetComponent<LineRenderer> ();
+
+		//test
+		keywords.Add("Hello", () => {
+			debugText.text = "Hi there!";
+		});
+
+		//you said "Pew", are you doing the hold gesture? If so shoot a lazer
+		keywords.Add("Pew", () => {
+			if (inHold) {
+				var headPosition = Camera.main.transform.position;
+				var gazeDirection = Camera.main.transform.forward;
+
+				line.SetPosition(0,headPosition);
+
+				RaycastHit hitInfo;
+				if (Physics.Raycast(headPosition, gazeDirection, out hitInfo)) {
+					// debug the tag of what you hit
+					debugText.text = hitInfo.collider.gameObject.tag;
+
+					line.SetPosition(1,hitInfo.point);
+				} else {
+					line.SetPosition(1,headPosition + gazeDirection * 100000);
+				}
+			} else {
+				debugText.text = "you aren't in hold!";
+			}
+		});
+
+		//set "inHold" depending on if you are in the hold position
+		recognizer.HoldStartedEvent += (source, headRay) => {
+			inHold = true;
+		};
+		recognizer.HoldCompletedEvent += (source, headRay) => {
+			inHold = false;
+		};
+	}
+}
