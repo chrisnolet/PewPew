@@ -4,7 +4,8 @@ using HoloToolkit.Unity.InputModule;
 
 public class NetworkPlayer : NetworkBehaviour {
   public GameObject laserPrefab;
-  public GameObject sphere;
+  public GameObject head;
+  public GameObject laserSpawn;
   public float maxFireWaitTime = 0.20f;
 
   #pragma warning disable 0414
@@ -84,7 +85,7 @@ public class NetworkPlayer : NetworkBehaviour {
   [Command]
   void CmdFire() {
     var laserRotation = transform.rotation * Quaternion.Euler(90, 0, 0);
-    var laser = Instantiate(laserPrefab, transform.position, laserRotation);
+    var laser = Instantiate(laserPrefab, laserSpawn.transform.position, laserRotation);
 
     // Spawn on the clients
     NetworkServer.Spawn(laser);
@@ -94,7 +95,7 @@ public class NetworkPlayer : NetworkBehaviour {
 
     // Add position offset for remote players only
     if (!isLocalPlayer) {
-      sphere.transform.localPosition = value;
+      head.transform.localPosition = value;
     }
   }
 
@@ -102,7 +103,7 @@ public class NetworkPlayer : NetworkBehaviour {
 
     // Add rotation offset for remote players only
     if (!isLocalPlayer) {
-      sphere.transform.localRotation = value;
+      head.transform.localRotation = value;
     }
   }
 }
