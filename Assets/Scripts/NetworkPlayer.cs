@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using HoloToolkit.Unity.InputModule;
 
 public class NetworkPlayer : NetworkBehaviour {
   public GameObject laserPrefab;
@@ -18,6 +19,9 @@ public class NetworkPlayer : NetworkBehaviour {
 
       // Attach player to the main camera
       transform.SetParent(Camera.main.transform, false);
+
+      // Listen for HoloLens input events
+      InputManager.Instance.AddGlobalListener(gameObject);
     }
   }
 
@@ -30,6 +34,20 @@ public class NetworkPlayer : NetworkBehaviour {
       if (Input.GetButton("Fire1")) {
         CmdFire();
       }
+    }
+  }
+
+  void OnInputClicked(InputClickedEventData eventData) {
+
+    // Fire on HoloLens input click
+    CmdFire();
+  }
+
+  void OnDestroy() {
+
+    // Remove HoloLens input event listener
+    if (isLocalPlayer) {
+      InputManager.Instance.RemoveGlobalListener(gameObject);
     }
   }
 
