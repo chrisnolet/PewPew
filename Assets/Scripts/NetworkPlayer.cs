@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using HoloToolkit.Unity.InputModule;
 
-public class NetworkPlayer : NetworkBehaviour {
+public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
   public GameObject laserPrefab;
   public GameObject head;
   public GameObject laserSpawn;
@@ -57,7 +57,7 @@ public class NetworkPlayer : NetworkBehaviour {
     }
   }
 
-  void OnInputClicked(InputClickedEventData eventData) {
+  public void OnInputClicked(InputClickedEventData eventData) {
 
     // Fire on HoloLens input click
     if (isLocalPlayer && canFire) {
