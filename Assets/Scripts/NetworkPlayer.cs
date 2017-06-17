@@ -21,6 +21,10 @@ public class NetworkPlayer : NetworkBehaviour {
     }
   }
 
+  public void TakeDamage() {
+    CmdTakeDamage();
+  }
+
   void Start() {
 
     // Local player only
@@ -53,17 +57,22 @@ public class NetworkPlayer : NetworkBehaviour {
     }
   }
 
-  void Fire() {
-    CmdFire();
-    fireWaitTimer = maxFireWaitTime;
-  }
-
   void OnInputClicked(InputClickedEventData eventData) {
 
     // Fire on HoloLens input click
-    if (canFire) {
+    if (isLocalPlayer && canFire) {
       Fire();
     }
+  }
+
+  void Fire() {
+    CmdFire();
+
+    // Play sound effect for local player laser fire
+    // TODO(CN): Play sound
+
+    // Force wait before firing again
+    fireWaitTimer = maxFireWaitTime;
   }
 
   void OnDestroy() {
@@ -89,6 +98,33 @@ public class NetworkPlayer : NetworkBehaviour {
 
     // Spawn on the clients
     NetworkServer.Spawn(laser);
+
+    RpcFire();
+  }
+
+  [Command]
+  void CmdTakeDamage() {
+    // TODO(CN): Add syncvar for hit points and decrement here
+
+    RpcTakeDamage();
+  }
+
+  [ClientRpc]
+  void RpcFire() {
+
+    // Play sound effect for another player's laser fire
+    if (!isLocalPlayer) {
+      // TODO(CN): Play sound
+    }
+  }
+
+  [ClientRpc]
+  void RpcTakeDamage() {
+
+    // Play sound effect for local player taking damage
+    if (isLocalPlayer) {
+      // TODO(CN): Play sound
+    }
   }
 
   void OnPositionOffsetChanged(Vector3 value) {

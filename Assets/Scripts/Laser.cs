@@ -12,4 +12,13 @@ public class Laser : MonoBehaviour {
     // Destroy after lifetime expires
     Object.Destroy(gameObject, lifetime);
   }
+
+  void OnTriggerEnter(Collider other) {
+    if (other.tag == Constants.PlayerTag) {
+
+      // Do damage to other players
+      var networkPlayer = other.GetComponent<NetworkPlayer>();
+      networkPlayer.TakeDamage();
+    }
+  }
 }
