@@ -14,11 +14,15 @@ public class Laser : MonoBehaviour {
   }
 
   void OnTriggerEnter(Collider other) {
-    if (other.tag == Constants.PlayerTag) {
+    if (other.tag == Constants.HeadTag) {
 
-      // Do damage to other players
-      var networkPlayer = other.GetComponent<NetworkPlayer>();
+      // Do damage to player
+      var networkPlayer = other.GetComponentInParent<NetworkPlayer>();
       networkPlayer.TakeDamage();
+
+      // Destroy laser and head
+      Destroy(other);
+      Destroy(gameObject);
     }
   }
 }
