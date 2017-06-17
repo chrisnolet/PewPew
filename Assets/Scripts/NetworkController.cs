@@ -7,6 +7,10 @@ public class NetworkController : MonoBehaviour {
 
   void Start () {
 
+    // Increase tolerence for packet loss
+    NetworkManager.singleton.connectionConfig.NetworkDropThreshold = 90;
+    NetworkManager.singleton.connectionConfig.OverflowDropThreshold = 90;
+
     // Detect host device
     if (VRDevice.isPresent) {
 
