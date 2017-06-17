@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 using UnityEngine.VR;
 
 public class NetworkController : MonoBehaviour {
-  public string networkAddress = "192.168.43.174";
+  public string networkAddress = "10.0.1.3";
 
   void Start () {
 
