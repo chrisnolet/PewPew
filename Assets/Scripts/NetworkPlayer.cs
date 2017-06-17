@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-using HoloToolkit.Unity.InputModule;
+using UnityEngine.VR.WSA.Input;
 
-public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
+public class NetworkPlayer : NetworkBehaviour {
   public GameObject laserPrefab;
   public GameObject head;
   public GameObject laserSpawn;
@@ -13,6 +13,7 @@ public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
   [SyncVar(hook = "OnRotationOffsetChanged")] private Quaternion rotationOffset;
   #pragma warning restore 0414
 
+  private GestureRecognizer recognizer = new GestureRecognizer();
   private float fireWaitTimer;
 
   private bool canFire {
@@ -32,6 +33,11 @@ public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
 
       // Attach player to the main camera
       transform.SetParent(Camera.main.transform, false);
+
+      // Add gesture recognizer
+      // recognizer.SetRecognizableGestures(GestureSettings.Tap);
+      recognizer.TappedEvent += RecognizerTappedEventCallback;
+      recognizer.StartCapturingGestures();
     }
   }
 
@@ -52,7 +58,11 @@ public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
     }
   }
 
-  public void OnInputClicked(InputClickedEventData eventData) {
+  void OnDestroy() {
+    recognizer.TappedEvent -= RecognizerTappedEventCallback;
+  }
+
+  void RecognizerTappedEventCallback(InteractionSourceKind source, int tapCount, Ray headRay) {
 
     // Fire on HoloLens input click
     if (isLocalPlayer && canFire) {
