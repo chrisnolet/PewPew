@@ -13,7 +13,7 @@ public class NetworkPlayer : NetworkBehaviour {
   [SyncVar(hook = "OnRotationOffsetChanged")] private Quaternion rotationOffset;
   #pragma warning restore 0414
 
-  private GestureRecognizer recognizer = new GestureRecognizer();
+  private GestureRecognizer recognizer;
   private float fireWaitTimer;
 
   private bool canFire {
@@ -35,7 +35,7 @@ public class NetworkPlayer : NetworkBehaviour {
       transform.SetParent(Camera.main.transform, false);
 
       // Add gesture recognizer
-      // recognizer.SetRecognizableGestures(GestureSettings.Tap);
+      recognizer = new GestureRecognizer();
       recognizer.TappedEvent += RecognizerTappedEventCallback;
       recognizer.StartCapturingGestures();
     }
