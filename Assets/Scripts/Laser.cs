@@ -16,13 +16,13 @@ public class Laser : MonoBehaviour {
   void OnTriggerEnter(Collider other) {
     if (other.tag == Constants.HeadTag) {
 
+      // Destroy laser and head
+      Destroy(other.gameObject); // TODO(CN): Consider disabling instead of destroying
+      Destroy(gameObject);
+
       // Do damage to player
       var networkPlayer = other.GetComponentInParent<NetworkPlayer>();
-      networkPlayer.TakeDamage();
-
-      // Destroy laser and head
-      Destroy(other);
-      Destroy(gameObject);
+      // networkPlayer.TakeDamage(); // TODO(CN): Can't call [Command] on another player
     }
   }
 }

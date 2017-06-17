@@ -35,9 +35,11 @@ public class NetworkPlayer : NetworkBehaviour {
       transform.SetParent(Camera.main.transform, false);
 
       // Add gesture recognizer
-      recognizer = new GestureRecognizer();
-      recognizer.TappedEvent += RecognizerTappedEventCallback;
-      recognizer.StartCapturingGestures();
+      try {
+        recognizer = new GestureRecognizer();
+        recognizer.TappedEvent += RecognizerTappedEventCallback;
+        recognizer.StartCapturingGestures();
+      } catch {}
     }
   }
 
@@ -59,7 +61,9 @@ public class NetworkPlayer : NetworkBehaviour {
   }
 
   void OnDestroy() {
-    recognizer.TappedEvent -= RecognizerTappedEventCallback;
+    if (recognizer != null) {
+      recognizer.TappedEvent -= RecognizerTappedEventCallback;
+    }
   }
 
   void RecognizerTappedEventCallback(InteractionSourceKind source, int tapCount, Ray headRay) {
