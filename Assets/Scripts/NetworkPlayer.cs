@@ -4,13 +4,21 @@ using HoloToolkit.Unity.InputModule;
 
 public class NetworkPlayer : NetworkBehaviour {
   public GameObject laserPrefab;
-
   public GameObject sphere;
+  public float maxFireWaitTime = 0.20f;
 
   #pragma warning disable 0414
   [SyncVar(hook = "OnPositionOffsetChanged")] private Vector3 positionOffset;
   [SyncVar(hook = "OnRotationOffsetChanged")] private Quaternion rotationOffset;
   #pragma warning restore 0414
+
+  private float fireWaitTimer;
+
+  private bool canFire {
+    get {
+      return (fireWaitTimer <= 0);
+    }
+  }
 
   void Start() {
 
@@ -21,7 +29,9 @@ public class NetworkPlayer : NetworkBehaviour {
       transform.SetParent(Camera.main.transform, false);
 
       // Listen for HoloLens input events
-      InputManager.Instance.AddGlobalListener(gameObject);
+      if (InputManager.Instance) {
+        InputManager.Instance.AddGlobalListener(gameObject);
+      }
     }
   }
 
@@ -30,23 +40,35 @@ public class NetworkPlayer : NetworkBehaviour {
     // Local player only
     if (isLocalPlayer) {
 
+      // Decrease fire wait timer
+      if (fireWaitTimer > 0) {
+        fireWaitTimer -= Time.deltaTime;
+      }
+
       // Input events
-      if (Input.GetButton("Fire1")) {
-        CmdFire();
+      if (Input.GetButton("Fire1") && canFire) {
+        Fire();
       }
     }
+  }
+
+  void Fire() {
+    CmdFire();
+    fireWaitTimer = maxFireWaitTime;
   }
 
   void OnInputClicked(InputClickedEventData eventData) {
 
     // Fire on HoloLens input click
-    CmdFire();
+    if (canFire) {
+      Fire();
+    }
   }
 
   void OnDestroy() {
 
     // Remove HoloLens input event listener
-    if (isLocalPlayer) {
+    if (isLocalPlayer && InputManager.Instance) {
       InputManager.Instance.RemoveGlobalListener(gameObject);
     }
   }
@@ -65,13 +87,6 @@ public class NetworkPlayer : NetworkBehaviour {
 
     // Spawn on the clients
     NetworkServer.Spawn(laser);
-
-    RpcFire();
-  }
-
-  [ClientRpc]
-  void RpcFire() {
-
   }
 
   void OnPositionOffsetChanged(Vector3 value) {

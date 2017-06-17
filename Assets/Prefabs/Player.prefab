@@ -159,6 +159,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 1689108121879910, guid: 9a578d57f89504fe190340d6ef2d69ff,
     type: 2}
   sphere: {fileID: 1143973857623402}
+  maxFireWaitTime: 0.15
 --- !u!114 &114651597314387858
 MonoBehaviour:
   m_ObjectHideFlags: 1
