@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 136535451818743978}
   - component: {fileID: 23805204741995208}
   - component: {fileID: 54601958879062576}
-  - component: {fileID: 114387938378689070}
-  - component: {fileID: 114531490030484826}
   - component: {fileID: 114173830069300594}
   m_Layer: 0
   m_Name: Laser
@@ -113,59 +111,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   lifetime: 1
---- !u!114 &114387938378689070
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1689108121879910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 154
-    i1: 87
-    i2: 141
-    i3: 87
-    i4: 248
-    i5: 149
-    i6: 4
-    i7: 254
-    i8: 25
-    i9: 3
-    i10: 64
-    i11: 214
-    i12: 239
-    i13: 45
-    i14: 105
-    i15: 255
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &114531490030484826
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1689108121879910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!136 &136535451818743978
 CapsuleCollider:
   m_ObjectHideFlags: 1

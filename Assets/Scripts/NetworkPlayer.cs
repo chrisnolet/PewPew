@@ -66,7 +66,13 @@ public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
   }
 
   void Fire() {
-    CmdFire();
+    var laserRotation = transform.rotation * Quaternion.Euler(90, 0, 0);
+
+    // Spawn local instance
+    Instantiate(laserPrefab, laserSpawn.transform.position, laserRotation);
+
+    // Instruct the server to spawn on other clients
+    CmdFire(laserSpawn.transform.position, laserRotation);
 
     // Play sound effect for local player laser fire
     // TODO(CN): Play sound
@@ -92,14 +98,10 @@ public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
   }
 
   [Command]
-  void CmdFire() {
-    var laserRotation = transform.rotation * Quaternion.Euler(90, 0, 0);
-    var laser = Instantiate(laserPrefab, laserSpawn.transform.position, laserRotation);
+  void CmdFire(Vector3 position, Quaternion rotation) {
 
     // Spawn on the clients
-    NetworkServer.Spawn(laser);
-
-    RpcFire();
+    RpcFire(position, rotation);
   }
 
   [Command]
@@ -110,10 +112,12 @@ public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
   }
 
   [ClientRpc]
-  void RpcFire() {
+  void RpcFire(Vector3 position, Quaternion rotation) {
 
-    // Play sound effect for another player's laser fire
+    // Instantiate laser on clients
     if (!isLocalPlayer) {
+      Instantiate(laserPrefab, position, rotation);
+
       // TODO(CN): Play sound
     }
   }
