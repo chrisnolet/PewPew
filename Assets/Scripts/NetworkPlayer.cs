@@ -32,11 +32,6 @@ public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
 
       // Attach player to the main camera
       transform.SetParent(Camera.main.transform, false);
-
-      // Listen for HoloLens input events
-      if (InputManager.Instance) {
-        InputManager.Instance.AddGlobalListener(gameObject);
-      }
     }
   }
 
@@ -79,14 +74,6 @@ public class NetworkPlayer : NetworkBehaviour, IInputClickHandler {
 
     // Force wait before firing again
     fireWaitTimer = maxFireWaitTime;
-  }
-
-  void OnDestroy() {
-
-    // Remove HoloLens input event listener
-    if (isLocalPlayer && InputManager.Instance) {
-      InputManager.Instance.RemoveGlobalListener(gameObject);
-    }
   }
 
   [Command]
